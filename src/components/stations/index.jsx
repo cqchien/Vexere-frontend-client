@@ -1,15 +1,27 @@
 import React from 'react';
 import StationItem from './StationItem';
-import stations from '../../mockup/stations';
 import Modal from './Modal';
+import api from "../../apis";
 
 const Station = () => {
+
+  const [station, setStation] = React.useState({})
+  const [stations, setStations] = React.useState([])
+
+  React.useEffect(() => {
+    api.get("/stations")
+      .then(res => {
+        setStations(res.data)
+      })
+      .catch(err => console.log(err))
+  }, [])
 
   const renderStations = () => {
     return stations.map((station, index) => {
       return <StationItem  
       key = {index}
       station  = {station}
+      setStation = {setStation}
       />
     })
   }
@@ -23,7 +35,7 @@ const Station = () => {
           {renderStations()}
         </div>
 
-        <Modal />
+        <Modal station = {station}/>
       </div>
     </div>
   );

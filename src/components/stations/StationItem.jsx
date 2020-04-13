@@ -1,7 +1,7 @@
 import React from 'react';
 
 const StationItem = (props) => {
-  const { station } = props
+  const { station, setStation } = props
 
   const [isShowDetail, toggleDetail] = React.useState(false);
   console.log(isShowDetail);
@@ -18,13 +18,14 @@ const StationItem = (props) => {
             Chi Tiết
           </button>
           
-          <button type="button" className="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#modelId">
+          <button type="button" className="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#modelId"
+            onClick={() => setStation(station)}>
             Hiển thị Modal
           </button>
           {
-             isShowDetail && <div>
-             <p className="card-text">Địa Chỉ: {station.address}</p>
-             <p className="card-text">Thành Phố: {station.province}</p>
+             isShowDetail && <div style={{textAlign: "left", fontSize: "14px"}}>
+             <p className="card-text mt-4">Địa Chỉ: {station.address}</p>
+             <p className="card-text ">Thành Phố: {station.province}</p>
            </div>
           }
         </div>
